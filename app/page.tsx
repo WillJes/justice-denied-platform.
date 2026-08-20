@@ -14,10 +14,10 @@ const files = [
   ["Research", "Public PDF", "Unanswered Questions", "The identification, notification, first-response, medical, witness, property, and forensic questions guiding the film.", "/archive/research-questions/justice-denied-research-questions.pdf"],
 ];
 const publicRecords = [
-  ["16 pages", "Discovery Working File", "Research objectives, discovery index, proposed witnesses, and investigative questions.", "/archive/public-records/discovery-working-file-redacted.pdf"],
-  ["52 pages", "Police, Medical & Legal Records - Part 1", "First-response, police, medical examiner, witness, news, and related legal records.", "/archive/public-records/police-medical-legal-records-part-1-redacted.pdf"],
-  ["61 pages", "Court & Correspondence Records - Part 2", "Court filings, attorney correspondence, emails, agency records, and related materials.", "/archive/public-records/court-correspondence-records-part-2-redacted.pdf"],
-  ["85 pages", "Compiled Gary Weems Public Records", "A larger compiled record set with personal contact and identifying information redacted.", "/archive/public-records/gary-weems-compiled-public-records-redacted.pdf"],
+  ["16 pages", "Discovery Working File", "Research objectives, discovery index, proposed witnesses, and investigative questions.", [["OPEN PDF", "/archive/public-records/discovery-working-file-redacted.pdf"]]],
+  ["52 pages · 5 volumes", "Police, Medical & Legal Records - Part 1", "First-response, police, medical examiner, witness, news, and related legal records.", Array.from({length:5},(_,i)=>[`VOLUME ${i+1}`, `/archive/public-records/police-medical-legal-records-part-1-volume-${String(i+1).padStart(2,"0")}-redacted.pdf`])],
+  ["61 pages · 6 volumes", "Court & Correspondence Records - Part 2", "Court filings, attorney correspondence, emails, agency records, and related materials.", Array.from({length:6},(_,i)=>[`VOLUME ${i+1}`, `/archive/public-records/court-correspondence-records-part-2-volume-${String(i+1).padStart(2,"0")}-redacted.pdf`])],
+  ["85 pages · 13 volumes", "Compiled Gary Weems Public Records", "A larger compiled record set with personal contact and identifying information redacted.", Array.from({length:13},(_,i)=>[`VOLUME ${i+1}`, `/archive/public-records/gary-weems-compiled-public-records-volume-${String(i+1).padStart(2,"0")}-redacted.pdf`])],
 ];
 
 export default function Home() {
@@ -56,7 +56,7 @@ export default function Home() {
       <div className="fileGrid">{files.map((f,i)=><article key={f[2]}><div className="filetop"><span>FILE 0{i+1}</span><span>{f[1]}</span></div><small>{f[0]}</small><h3>{f[2]}</h3><p>{f[3]}</p><a className="fileLink" href={f[4]} target="_blank" rel="noreferrer">OPEN PDF →</a></article>)}</div>
       <div className="recordsHeading"><p className="num">PUBLIC SOURCE RECORDS</p><h3>Read the underlying record.</h3><p>These are public-record copies with detected personal addresses, phone numbers, emails, signatures, identification details, and similar information blacked out.</p></div>
       <div className="contentWarning"><strong>Content warning:</strong> These files discuss death, substance use, medical findings, alleged police misconduct, and may contain distressing documentary images. Viewer discretion is advised.</div>
-      <div className="recordGrid">{publicRecords.map((record,i)=><article key={record[1]}><div><span>RECORD {String(i+1).padStart(2,"0")}</span><span>{record[0]}</span></div><h3>{record[1]}</h3><p>{record[2]}</p><a href={record[3]} target="_blank" rel="noreferrer">VIEW REDACTED RECORD →</a></article>)}</div>
+      <div className="recordGrid">{publicRecords.map((record,i)=><article key={String(record[1])}><div><span>RECORD {String(i+1).padStart(2,"0")}</span><span>{String(record[0])}</span></div><h3>{String(record[1])}</h3><p>{String(record[2])}</p><nav className="recordLinks" aria-label={`${record[1]} downloads`}>{(record[3] as string[][]).map(link=><a key={link[1]} href={link[1]} target="_blank" rel="noreferrer">{link[0]} →</a>)}</nav></article>)}</div>
       <p className="note">Redaction was applied conservatively for public release. The unchanged original records remain preserved separately.</p>
     </section>
 
