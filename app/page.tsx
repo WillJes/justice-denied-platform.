@@ -17,7 +17,7 @@ const publicRecords = [
   ["16 pages", "Discovery Working File", "Research objectives, discovery index, proposed witnesses, and investigative questions.", [["OPEN PDF", "/archive/public-records/discovery-working-file-redacted.pdf"]]],
   ["52 pages · 5 volumes", "Police, Medical & Legal Records - Part 1", "First-response, police, medical examiner, witness, news, and related legal records.", Array.from({length:5},(_,i)=>[`VOLUME ${i+1}`, `/archive/public-records/police-medical-legal-records-part-1-volume-${String(i+1).padStart(2,"0")}-redacted.pdf`])],
   ["61 pages · 6 volumes", "Court & Correspondence Records - Part 2", "Court filings, attorney correspondence, emails, agency records, and related materials.", Array.from({length:6},(_,i)=>[`VOLUME ${i+1}`, `/archive/public-records/court-correspondence-records-part-2-volume-${String(i+1).padStart(2,"0")}-redacted.pdf`])],
-  ["85 pages · 13 volumes", "Compiled Gary Weems Public Records", "A larger compiled record set with personal contact and identifying information redacted.", Array.from({length:13},(_,i)=>[`VOLUME ${i+1}`, `/archive/public-records/gary-weems-compiled-public-records-volume-${String(i+1).padStart(2,"0")}-redacted.pdf`])],
+  ["75 pages · 10 volumes", "Compiled Gary Weems Public Records", "A larger compiled record set with personal contact and identifying information redacted.", Array.from({length:10},(_,i)=>[`VOLUME ${i+1}`, `/archive/public-records/gary-weems-compiled-public-records-volume-${String(i+1).padStart(2,"0")}-redacted.pdf`])],
 ];
 
 export default function Home() {
