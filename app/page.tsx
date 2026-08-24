@@ -53,7 +53,7 @@ export default function Home() {
       </div></div>
       <div className="videoGrid">
         <article><small>AGE 16</small><h3>“Why”</h3><p>Written for her father as a teenager and later produced in the studio—music as memory, grief, and testimony.</p></article>
-        <article><small>STAGE & STORY</small><h3>We Are the Dream</h3><p>A musical work carrying lived experience into performance, community, and collective hope.</p></article>
+        <article><small>2021 · STAGE & STORY</small><h3>We Are the Dream</h3><p>A musical work carrying lived experience into performance, community, and collective hope.</p></article>
         <article><small>2025 → 2026</small><h3>The End → Justice Denied</h3><p>From published fiction to a 72-minute feature documentary: a continuing creative journey toward justice.</p></article>
       </div>
     </section>
