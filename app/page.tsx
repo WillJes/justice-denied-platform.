@@ -35,7 +35,7 @@ export default function Home() {
         <p className="lead">A daughter&apos;s 33-year journey to uncover the truth about her father&apos;s death—and transform childhood grief into a 72-minute film, art, advocacy, and a justice of her own making.</p>
         <div className="actions"><a className="btn red" href="#watch">Watch the teaser ▶</a><a className="btn clear" href="#support">Support the film</a></div>
       </div>
-      <div className="heroArt"><img src="/images/justice-denied-cover-clean.jpg" alt="Justice Denied documentary film cover"/><span>OFFICIAL DOCUMENTARY ARTWORK</span></div>
+      <div className="heroArt"><img src="/images/justice-denied-cover-clean.jpg" alt="Justice Denied documentary film cover"/></div>
     </header>
 
     <section id="story"><p className="num">01 / THE STORY</p><blockquote>“When the system says denied, we create our own justice and peace.”</blockquote>
