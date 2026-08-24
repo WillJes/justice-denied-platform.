@@ -2,10 +2,10 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
   "buildCommand": "npx next build",
-  "rewrites": [
+  "routes": [
     {
-      "source": "/:path*",
-      "destination": "https://justice-denied-platform.jes-84.chatgpt.site/:path*"
+      "src": "/(.*)",
+      "dest": "https://justice-denied-platform.jes-84.chatgpt.site/$1"
     }
   ]
 }
