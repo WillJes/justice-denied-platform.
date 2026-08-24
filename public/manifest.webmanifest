@@ -1,0 +1,17 @@
+{
+  "name": "Justice Denied",
+  "short_name": "Justice Denied",
+  "description": "The official film platform for Justice Denied by Jestina Weems-Rosenduft.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#11100e",
+  "theme_color": "#b42217",
+  "icons": [
+    {
+      "src": "/images/justice-denied-cover-clean.jpg",
+      "sizes": "any",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}
