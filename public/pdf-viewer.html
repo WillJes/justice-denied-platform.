@@ -6,33 +6,19 @@
   <meta name="theme-color" content="#11100e">
   <title>Justice Denied Archive</title>
   <style>
-    *{box-sizing:border-box}html,body{height:100%;margin:0}body{display:grid;grid-template-rows:auto 1fr;background:#2b2b2b;font-family:Arial,sans-serif}
-    header{display:flex;align-items:center;gap:14px;min-height:64px;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;background:#11100e;color:#f4eddf;box-shadow:0 2px 12px #0008;z-index:2}
-    button{border:1px solid #ffffff55;border-radius:999px;background:#b42217;color:#fff;padding:10px 16px;font:700 14px Arial,sans-serif;white-space:nowrap;cursor:pointer}
-    div{min-width:0}strong{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}small{color:#d7cdbd}
-    iframe{width:100%;height:100%;border:0;background:#fff}
+    :root{--ink:#11100e;--cream:#f4eddf;--red:#b42217}*{box-sizing:border-box}html,body{height:100%;margin:0}body{display:flex;flex-direction:column;background:#302e2a;color:var(--cream);font-family:Arial,sans-serif;overflow:hidden}
+    header{position:relative;z-index:5;display:grid;grid-template-columns:auto auto minmax(0,1fr) auto;align-items:center;gap:10px;min-height:72px;padding:calc(9px + env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) 9px max(12px,env(safe-area-inset-left));background:var(--ink);border-bottom:4px solid var(--red);box-shadow:0 4px 18px #0009}
+    button,a{min-height:44px;display:inline-flex;align-items:center;justify-content:center;border:1px solid #ffffff45;background:#201e1b;color:#fff;padding:0 13px;font:800 .68rem/1 Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;cursor:pointer}button:hover,button:focus,a:hover,a:focus{background:var(--red);outline:2px solid #fff;outline-offset:2px}.home{gap:7px}.home b{display:grid;place-items:center;width:27px;height:27px;background:var(--red);font:700 1rem Georgia,serif}.title{min-width:0}.title small{display:block;color:#b9b0a4;font-size:.52rem;font-weight:800;letter-spacing:.13em}.title strong{display:block;margin-top:4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:1rem/1.1 Georgia,serif}
+    .pages{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:18px max(10px,calc((100vw - 1100px)/2));scrollbar-gutter:stable}.page{position:relative;margin:0 auto 18px;background:#fff;box-shadow:0 5px 22px #0008;overflow:hidden}.page canvas{display:block;width:100%;height:100%}.page span{position:absolute;inset:0;display:grid;place-items:center;color:#777;font-size:.75rem}.page.rendered span{display:none}.error{max-width:620px;margin:50px auto;background:#171512;border-left:5px solid var(--red);padding:24px;line-height:1.6}.error a{margin-top:14px}
+    @media(max-width:720px){header{grid-template-columns:auto auto minmax(0,1fr)}.open{grid-column:1/-1;min-height:38px}.home span{display:none}.title strong{font-size:.84rem}.pages{padding:10px 5px}.page{margin-bottom:10px}}
   </style>
 </head>
 <body>
-  <header>
-    <button type="button" id="back">← Back</button>
-    <div><strong id="title">Public Archive</strong><small>Justice Denied</small></div>
-  </header>
-  <iframe id="pdf" title="Justice Denied public archive PDF"></iframe>
+  <header><button type="button" id="back">← Back</button><a class="home" href="/#archive"><b>JD</b><span>Archive</span></a><div class="title"><small>PUBLIC RECORD</small><strong id="title">Loading document…</strong></div><a class="open" id="open" href="/#archive" target="_blank" rel="noreferrer">Open original ↗</a></header>
+  <div class="pages" id="pages" aria-live="polite"><div>Loading every page…</div></div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script>
-    const params=new URLSearchParams(location.search);
-    const file=params.get("file")||"";
-    const title=params.get("title")||"Public Archive";
-    document.getElementById("title").textContent=title;
-    document.title=title+" | Justice Denied";
-    if(file.startsWith("/archive/")&&file.toLowerCase().endsWith(".pdf")){
-      document.getElementById("pdf").src=file;
-    }else{
-      location.replace("/#archive");
-    }
-    document.getElementById("back").addEventListener("click",()=>{
-      if(history.length>1) history.back(); else location.href="/#archive";
-    });
+    (()=>{const params=new URLSearchParams(location.search);const file=params.get("file")||"";const title=(params.get("title")||"Public record").slice(0,140);const pages=document.getElementById("pages");const titleEl=document.getElementById("title");const open=document.getElementById("open");titleEl.textContent=title;document.title=title+" | Justice Denied";document.getElementById("back").addEventListener("click",()=>history.length>1?history.back():location.assign("/#archive"));const safe=file.startsWith("/archive/")&&file.toLowerCase().endsWith(".pdf")&&!file.includes("..")&&!file.includes("\\");if(!safe){location.replace("/#archive");return}open.href=file;const fail=message=>{pages.innerHTML=`<div class="error"><strong>We could not display this PDF inside the page.</strong><p>${message}</p><a href="${file}" target="_blank" rel="noreferrer">Open the original PDF ↗</a></div>`};if(!window.pdfjsLib){fail("The document reader did not load. Use the button below to open the complete PDF.");return}pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";pdfjsLib.getDocument(file).promise.then(async pdf=>{pages.innerHTML="";const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){renderPage(entry.target,pdf);observer.unobserve(entry.target)}}),{root:pages,rootMargin:"900px 0px"});for(let number=1;number<=pdf.numPages;number++){const page=await pdf.getPage(number);const base=page.getViewport({scale:1});const holder=document.createElement("section");holder.className="page";holder.dataset.page=String(number);holder.style.aspectRatio=`${base.width}/${base.height}`;holder.innerHTML=`<span>Page ${number} of ${pdf.numPages}</span>`;pages.appendChild(holder);observer.observe(holder)}}).catch(()=>fail("Use the button below to open the complete PDF in your browser."));async function renderPage(holder,pdf){if(holder.dataset.rendered)return;holder.dataset.rendered="true";const number=Number(holder.dataset.page);const page=await pdf.getPage(number);const base=page.getViewport({scale:1});const cssWidth=Math.min(pages.clientWidth-10,1100);const cssScale=cssWidth/base.width;const pixelRatio=Math.min(devicePixelRatio||1,2);const viewport=page.getViewport({scale:cssScale*pixelRatio});const canvas=document.createElement("canvas");canvas.width=Math.floor(viewport.width);canvas.height=Math.floor(viewport.height);canvas.style.width=cssWidth+"px";canvas.style.height=(base.height*cssScale)+"px";holder.appendChild(canvas);await page.render({canvasContext:canvas.getContext("2d"),viewport}).promise;holder.classList.add("rendered")}})();
   </script>
 </body>
 </html>
