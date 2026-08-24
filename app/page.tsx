@@ -54,7 +54,8 @@ export default function Home() {
       <div className="videoGrid">
         <article><small>AGE 16</small><h3>“Why”</h3><p>Written for her father as a teenager and later produced in the studio—music as memory, grief, and testimony.</p></article>
         <article><small>2021 · STAGE & STORY</small><h3>We Are the Dream</h3><p>A musical work carrying lived experience into performance, community, and collective hope.</p></article>
-        <article><small>2025 → 2026</small><h3>The End → Justice Denied</h3><p>From published fiction to a 72-minute feature documentary: a continuing creative journey toward justice.</p></article>
+        <article><small>2025 · FICTIONAL NOVEL</small><h3>The End</h3><p>A fictional hero&apos;s journey in which Jestina can pursue justice for her father through imagination. A screenplay adaptation is now being written.</p></article>
+        <article><small>2026 · DOCUMENTARY FILM</small><h3>Justice Denied</h3><p>A separate 72-minute documentary chronicling Jestina&apos;s real-life, 33-year journey for truth, dignity, and accountability.</p></article>
       </div>
     </section>
 
