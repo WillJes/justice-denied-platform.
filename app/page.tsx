@@ -60,7 +60,8 @@ export default function Home() {
     </section>
 
     <section className="dark" id="watch"><Heading number="03 / WATCH" title="Enter the story." text="Watch the official teaser for the 72-minute film, then follow its making." light/>
-      <div className="video"><iframe src="https://www.youtube-nocookie.com/embed/mwPhMGvIWSM" title="Justice Denied official teaser" allowFullScreen/></div>
+      <div className="video"><iframe src="https://www.youtube.com/embed/mwPhMGvIWSM" title="Justice Denied official teaser" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen/></div>
+      <div className="actions center"><a className="btn red" href="https://www.youtube.com/watch?v=mwPhMGvIWSM" target="_blank" rel="noreferrer">Watch the teaser on YouTube ↗</a></div>
       <div className="videoGrid"><article><small>NOW PLAYING</small><h3>Official Teaser</h3><p>60 seconds · Justice Denied</p></article>
       <article onClick={()=>soon("Behind-the-scenes videos can be added as soon as they are uploaded.")}><small>COMING NEXT</small><h3>Behind the Scenes</h3><p>Production diaries & filmmaker notes</p></article>
       <article onClick={()=>soon("Interview clips can be linked here when they are ready.")}><small>ARCHIVE SERIES</small><h3>Voices & Interviews</h3><p>Extended conversations and context</p></article></div>
